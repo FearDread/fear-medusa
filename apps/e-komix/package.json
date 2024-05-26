@@ -12,6 +12,7 @@
     "@stripe/stripe-js": "^1.21.2",
     "@tailwindcss/forms": "^0.4.0",
     "autoprefixer": "^10.4.0",
+    "daisyui": "^4.11.1",
     "formik": "^2.2.9",
     "gatsby": "^4.0.2",
     "gatsby-plugin-image": "^2.0.0",

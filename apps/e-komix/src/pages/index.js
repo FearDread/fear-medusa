@@ -18,15 +18,15 @@ const IndexPage = ({ data }) => {
       <div className="bg-ui-light pb-12 lg:pb-0 w-full px-4 sm:px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row items-center max-w-screen-2xl mx-auto">
           <StaticImage
-            src="../images/hero-merch.png"
-            alt="A black Medusa hoodie and a white Medusa coffee mug"
+            src="../images/hero.png"
+            alt="comic banner"
             placeholder="tracedSVG"
             className="w-full lg:w-1/2 h-auto"
           />
           <div>
-            <h1 className="text-4xl">CLAIM YOUR MERCH</h1>
+            <h1 className="text-4xl">CLAIN YOUR DISCOUNT!</h1>
             <p className="mt-2 text-lg font-normal">
-              Contribute to Medusa and receive free merch
+              First time buyers recieve additional 10% off any purchase!
               <br />
               as a token of our appreciation
             </p>
