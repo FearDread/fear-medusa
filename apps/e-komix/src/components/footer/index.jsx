@@ -114,7 +114,9 @@ export default function Footer() {
       <Container>
         <Row>
           <Col md="3">
-           { // <img src={require("assets/img/ekomix/logo_transparent.png")} alt="logo" /> }
+           { 
+           // <img src={require("assets/img/ekomix/logo_transparent.png")} alt="logo" /> 
+            }
           </Col>
 
             {footMenu.map((item) => {
