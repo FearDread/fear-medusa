@@ -38,6 +38,7 @@ module.exports = {
   },
   daisyui: {
     themes: [ "dark",
+    /*
     {
         mytheme: {
          "primary": "#9800ff",
@@ -51,6 +52,7 @@ module.exports = {
           "error": "#ff2c4b",
         },
       },
+      */
     ],
   },
   plugins: [
