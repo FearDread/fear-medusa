@@ -1,7 +1,5 @@
-import LocalEntry from "./_local-entry"
 
-const extensions = [
-  LocalEntry
-]
+    const extensions = []
 
-export default extensions
+    export default extensions
+  
