@@ -2,43 +2,24 @@
 
 You may define custom eventhandlers, `subscribers` by creating files in the `/subscribers` directory.
 
-```ts
-import MyCustomService from "../services/my-custom";
-import {
-  OrderService,
-  SubscriberArgs,
-  SubscriberConfig,
-} from "@medusajs/medusa";
+```js
+class WelcomeSubscriber {
+  constructor({ welcomeService, eventBusService }) {
+    this.welcomeService_ = welcomeService;
 
-type OrderPlacedEvent = {
-  id: string;
-  no_notification: boolean;
-};
+    eventBusService.subscribe("order.placed", this.handleWelcome);
+  }
 
-export default async function orderPlacedHandler({
-  data,
-  eventName,
-  container,
-}: SubscriberArgs<OrderPlacedEvent>) {
-  const orderService: OrderService = container.resolve(OrderService);
-
-  const order = await orderService.retrieve(data.id, {
-    relations: ["items", "items.variant", "items.variant.product"],
-  });
-
-  // Do something with the order
+  handleWelcome = async (data) => {
+    return await this.welcomeService_.sendWelcome(data.id);
+  };
 }
 
-export const config: SubscriberConfig = {
-  event: OrderService.Events.PLACED,
-};
+export default WelcomeSubscriber;
 ```
 
-A subscriber is defined in two parts a `handler` and a `config`. The `handler` is a function which is invoked when an event is emitted. The `config` is an object which defines which event(s) the subscriber should subscribe to.
+A subscriber is defined as a `class` which is registered as a subscriber by invoking `eventBusService.subscribe` in the `constructor` of the class.
 
-The `handler` is a function which takes one parameter, an `object` of type `SubscriberArgs<T>` with the following properties:
+The type of event that the subscriber subscribes to is passed as the first parameter to the `eventBusService.subscribe` and the eventhandler is passed as the second parameter. The types of events a service can emmit are described in the individual service.
 
-- `data` - an `object` of type `T` containing information about the event.
-- `eventName` - a `string` containing the name of the event.
-- `container` - a `MedusaContainer` instance which can be used to resolve services.
-- `pluginOptions` - an `object` containing plugin options, if the subscriber is defined in a plugin.
+An eventhandler has one paramenter; a data `object` which contain information relating to the event, including relevant `id's`. The `id` can be used to fetch the appropriate entity in the eventhandler.

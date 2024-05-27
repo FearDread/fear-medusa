@@ -1,29 +1,21 @@
 <p align="center">
-  <a href="https://www.medusajs.com">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/59018053/229103275-b5e482bb-4601-46e6-8142-244f531cebdb.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    <img alt="Medusa logo" src="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    </picture>
+  <a href="https://www.medusa-commerce.com">
+    <img alt="Medusa" src="https://user-images.githubusercontent.com/7554214/129161578-19b83dc8-fac5-4520-bd48-53cba676edd2.png" width="100" />
   </a>
 </p>
 <h1 align="center">
-  Medusa
+  Medusa Starter Default
 </h1>
-
-<h4 align="center">
-  <a href="https://docs.medusajs.com">Documentation</a> |
-  <a href="https://www.medusajs.com">Website</a>
-</h4>
-
 <p align="center">
-  Building blocks for digital commerce
+This repo provides the skeleton to get you started with using <a href="https://github.com/medusajs/medusa">Medusa</a>. Follow the steps below to get ready.
 </p>
 <p align="center">
+  <a href="https://github.com/medusajs/medusa/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Medusa is released under the MIT license." />
+  </a>
   <a href="https://github.com/medusajs/medusa/blob/master/CONTRIBUTING.md">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt="PRs welcome!" />
   </a>
-    <a href="https://www.producthunt.com/posts/medusa"><img src="https://img.shields.io/badge/Product%20Hunt-%231%20Product%20of%20the%20Day-%23DA552E" alt="Product Hunt"></a>
   <a href="https://discord.gg/xpCwq3Kfn8">
     <img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" alt="Discord Chat" />
   </a>
@@ -32,39 +24,127 @@
   </a>
 </p>
 
-## Compatibility
+## Prerequisites
 
-This starter is compatible with versions >= 1.8.0 of `@medusajs/medusa`. 
+This starter has minimal prerequisites and most of these will usually already be installed on your computer.
 
-## Getting Started
+- [Install Node.js](https://nodejs.org/en/download/)
+- [Install git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Install SQLite](https://www.sqlite.org/download.html)
 
-Visit the [Quickstart Guide](https://docs.medusajs.com/create-medusa-app) to set up a server.
+## Setting up your store
 
-Visit the [Docs](https://docs.medusajs.com/development/backend/prepare-environment) to learn more about our system requirements.
+- Install the Medusa CLI
+  ```
+  npm install -g @medusajs/medusa
+  yarn global add @medusajs/medusa
+  ```
+- Create a new Medusa project
+  ```
+  medusa new my-medusa-store
+  ```
+- Run your project
+  ```
+  cd my-medusa-store
+  medusa develop
+  ```
 
-## What is Medusa
+Your local Medusa server is now running on port **9000**.
 
-Medusa is a set of commerce modules and tools that allow you to build rich, reliable, and performant commerce applications without reinventing core commerce logic. The modules can be customized and used to build advanced ecommerce stores, marketplaces, or any product that needs foundational commerce primitives. All modules are open-source and freely available on npm.
+### Seeding your Medusa store
 
-Learn more about [Medusa’s architecture](https://docs.medusajs.com/development/fundamentals/architecture-overview) and [commerce modules](https://docs.medusajs.com/modules/overview) in the Docs.
+---
 
-## Roadmap, Upgrades & Plugins
+To seed your medusa store run the following command:
 
-You can view the planned, started and completed features in the [Roadmap discussion](https://github.com/medusajs/medusa/discussions/categories/roadmap).
+```
+medusa seed -f ./data/seed.json
+```
 
-Follow the [Upgrade Guides](https://docs.medusajs.com/upgrade-guides/) to keep your Medusa project up-to-date.
+This command seeds your database with some sample datal to get you started, including a store, an administrator account, a region and a product with variants. What the data looks like precisely you can see in the `./data/seed.json` file.
 
-Check out all [available Medusa plugins](https://medusajs.com/plugins/).
+## Setting up your store with Docker
 
-## Community & Contributions
+- Install the Medusa CLI
+  ```
+  npm install -g @medusajs/medusa-cli
+  ```
+- Create a new Medusa project
+  ```
+  medusa new my-medusa-store
+  ```
+- Update project config in `medusa-config.js`:
 
-The community and core team are available in [GitHub Discussions](https://github.com/medusajs/medusa/discussions), where you can ask for support, discuss roadmap, and share ideas.
+  ```
+  module.exports = {
+    projectConfig: {
+      redis_url: REDIS_URL,
+      database_url: DATABASE_URL, //postgres connectionstring
+      database_type: "postgres",
+      store_cors: STORE_CORS,
+      admin_cors: ADMIN_CORS,
+    },
+    plugins,
+  };
+  ```
 
-Join our [Discord server](https://discord.com/invite/medusajs) to meet other community members.
+- Run your project
 
-## Other channels
+  When running your project the first time `docker compose` should be run with the `build` flag to build your contianer locally:
 
-- [GitHub Issues](https://github.com/medusajs/medusa/issues)
-- [Twitter](https://twitter.com/medusajs)
-- [LinkedIn](https://www.linkedin.com/company/medusajs)
-- [Medusa Blog](https://medusajs.com/blog/)
+  ```
+  docker compose up --build
+  ```
+
+  When running your project subsequent times you can run docker compose with no flags to spin up your local environment in seconds:
+
+  ```
+  docker compose up
+  ```
+
+Your local Medusa server is now running on port **9000**.
+
+### Seeding your Medusa store with Docker
+
+---
+
+To add seed data to your medusa store runnign with Docker, run this command in a seperate terminal:
+
+```
+docker exec medusa-server medusa seed -f ./data/seed.json
+```
+
+This will execute the previously described seed script in the running `medusa-server` Docker container.
+
+## Try it out
+
+```
+curl -X GET localhost:9000/store/products | python -m json.tool
+```
+
+After the seed script has run you will have the following things in you database:
+
+- a User with the email: admin@medusa-test.com and password: supersecret
+- a Region called Default Region with the countries GB, DE, DK, SE, FR, ES, IT
+- a Shipping Option called Standard Shipping which costs 10 EUR
+- a Product called Cool Test Product with 4 Product Variants that all cost 19.50 EUR
+
+Visit [docs.medusa-commerce.com](https://docs.medusa-commerce.com) for further guides.
+
+<p>
+  <a href="https://www.medusa-commerce.com">
+    Website
+  </a> 
+  |
+  <a href="https://medusajs.notion.site/medusajs/Medusa-Home-3485f8605d834a07949b17d1a9f7eafd">
+    Notion Home
+  </a>
+  |
+  <a href="https://twitter.com/intent/follow?screen_name=medusajs">
+    Twitter
+  </a>
+  |
+  <a href="https://docs.medusa-commerce.com">
+    Docs
+  </a>
+</p>

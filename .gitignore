@@ -5,22 +5,3 @@
 /node_modules
 yarn-error.log
 
-.idea
-.cache/
-
-coverage
-
-!src/**
-
-./tsconfig.tsbuildinfo
-package-lock.json
-yarn.lock
-medusa-db.sql
-build
-
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
