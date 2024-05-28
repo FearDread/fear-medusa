@@ -30,19 +30,16 @@ const plugins = [
       upload_dir: "uploads",
     },
   },
-  // Uncomment to add Stripe support.
-  // You can create a Stripe account via: https://stripe.com
-  // {
-  //   resolve: `medusa-payment-stripe`,
-  //   options: {
-  //     api_key: STRIPE_API_KEY,
-  //     webhook_secret: STRIPE_WEBHOOK_SECRET,
-  //   },
-  // },
+  {
+  resolve: `medusa-payment-stripe`,
+  options: {
+      api_key: STRIPE_API_KEY,
+      webhook_secret: STRIPE_WEBHOOK_SECRET,
+   },
 ];
 /* Uncomment to add redis modules */
 const modules = {
-  /*eventBus: {
+  eventBus: {
     resolve: "@medusajs/event-bus-redis",
     options: {
       redisUrl: REDIS_URL
@@ -53,7 +50,7 @@ const modules = {
     options: {
       redisUrl: REDIS_URL
     }
-  },*/
+  },
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
