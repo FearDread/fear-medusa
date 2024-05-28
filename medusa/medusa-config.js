@@ -59,11 +59,11 @@ const modules = {
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
   jwt_secret: process.env.JWT_SECRET,
-  cookie_secret: process.env.COOKIE_SECRET
+  cookie_secret: process.env.COOKIE_SECRET,
   store_cors: process.env.STORE_CORS,
   database_url: process.env.DATABASE_URL,
   admin_cors: process.env.ADMIN_CORS,
-  redis_url: process.env.REDIS_URL
+ // redis_url: process.env.REDIS_URL
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule} */

@@ -1,10 +1,9 @@
-FROM node:17.1.0
+FROM node:lts
 
 WORKDIR /app/medusa
 
 COPY package.json .
-COPY develop.sh .
-COPY yarn.lock .
+COPY tsconfig.json .
 
 RUN apt-get update
 
@@ -12,8 +11,14 @@ RUN apt-get install -y python
 
 RUN npm install -g npm@latest
 
-RUN npm install -g @medusajs/medusa-cli@latest
+RUN yarn global add -g @medusajs/medusa-cli@latest
 
-RUN npm install
+COPY . .
 
-ENTRYPOINT ["./develop.sh"]
+RUN yarn install
+
+EXPOSE 9000
+ENTRYPOINT ["./develop.sh", "develop"]
+
+# Define the command to run the app
+# CMD [ "npm", "start" ]
