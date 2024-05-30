@@ -33,22 +33,23 @@ const plugins = [
   {
   resolve: `medusa-payment-stripe`,
   options: {
-      api_key: STRIPE_API_KEY,
-      webhook_secret: STRIPE_WEBHOOK_SECRET,
+      api_key: process.env.STRIPE_API_KEY,
+      webhook_secret: process.env.STRIPE_WEBHOOK_SECRET,
    },
+  }
 ];
 /* Uncomment to add redis modules */
 const modules = {
   eventBus: {
     resolve: "@medusajs/event-bus-redis",
     options: {
-      redisUrl: REDIS_URL
+      redisUrl: process.env.REDIS_URL
     }
   },
   cacheService: {
     resolve: "@medusajs/cache-redis",
     options: {
-      redisUrl: REDIS_URL
+      redisUrl: process.env.REDIS_URL
     }
   },
 };
