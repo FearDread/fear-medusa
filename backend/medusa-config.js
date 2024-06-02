@@ -39,6 +39,7 @@ const plugins = [
   }
 ];
 /* Uncomment to add redis modules */
+/*
 const modules = {
   eventBus: {
     resolve: "@medusajs/event-bus-redis",
@@ -53,7 +54,7 @@ const modules = {
     }
   },
 };
-
+*/
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
   jwt_secret: process.env.JWT_SECRET,
@@ -68,5 +69,5 @@ const projectConfig = {
 module.exports = {
   projectConfig,
   plugins,
-  modules,
+  //modules,
 };

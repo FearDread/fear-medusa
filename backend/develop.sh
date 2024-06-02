@@ -2,4 +2,4 @@
 
 medusa migrations run
 
-medusa develop
+medusa $1
